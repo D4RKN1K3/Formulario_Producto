@@ -1,0 +1,118 @@
+html, body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+
+.form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.form-container h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  
+}
+
+.form-group input,
+.form-group select {
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* Agrupar los checkboxes */
+.checkbox-group-wrapper {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+}
+
+input[type="checkbox"] {
+  accent-color: #218cff; 
+}
+
+/* Descripción y botón ocupan el ancho completo */
+.full-width {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.center-button {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+}
+
+input,
+select,
+textarea {
+  padding: 8px;
+  resize: vertical;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #1aab8a;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 8px; /* esquinas redondeadas */
+  width: auto;        /* no se estira */
+  min-width: 350px;   /* o el valor que desees */
+
+}

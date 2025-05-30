@@ -1,0 +1,12 @@
+PostgreSQL version 16.9
+PHP version 8.3.21
+
+
+Antes de realizar la ejecucion revisar que el archivo php.ini de la instalacion de php
+tenga activos los driver para PostgreSQL
+
+Ejecutar un Servidor local de php usando cmd
+    php -S localhost:8000
+
+Acceder a 
+    http://localhost:8000/index.html

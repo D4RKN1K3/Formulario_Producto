@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulario Producto</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<script src="validacion.js"></script>
+<body>
+  <div class="form-container">
+    <h2>Formulario de Producto</h2>
+    <form id="formulario">
+        <div class="form-group">
+            <label>Código</label>
+            <input type="text" id="codigo" name="codigo">
+        </div>
+
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" id="nombre" name="nombre">
+        </div>
+
+        
+        <div class="form-group">
+            <label>Bodega</label>
+            <select id="bodega"></select>
+        </div>
+
+        <div class="form-group">
+            <label>Sucursal</label>
+            <select id="sucursal"></select>
+                <option value="" selected></option>
+        </div>
+
+        <div class="form-group">
+            <label>Moneda</label>
+            <select id="moneda" name="moneda">
+                <option value="" selected></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Precio</label>
+            <input type="text" id="precio" name="precio">
+        </div>
+
+        <div class="checkbox-group-wrapper">
+            <label>Material del Producto</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="material" value="1"> Plástico</label>
+                <label><input type="checkbox" name="material" value="2"> Metal</label>
+                <label><input type="checkbox" name="material" value="3"> Madera</label>
+                <label><input type="checkbox" name="material" value="4"> Vidrio</label>
+                <label><input type="checkbox" name="material" value="5"> Textil</label>
+            </div>
+        </div>
+
+        <div class="full-width">
+            <label>Descripción</label>
+            <textarea id="descripcion" name="descripcion" rows="4" cols="50" placeholder="Ingresa la descripción del producto"></textarea>
+        </div>
+
+        <div class="center-button">
+            <button type="submit" id="guardar">Guardar Producto</button>
+        </div>
+    </form>
+    <p id="mensaje"></p>
+  </div>
+</body>
+</html>
