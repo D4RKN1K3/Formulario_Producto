@@ -1,0 +1,46 @@
+function validaRUT(rut){
+    let i, s, dv, r, rutLimpio;
+    const f = "32765432";
+    r = rut;
+    if(/[-.]/.test(rut)){
+        rutLimpio = rut.replace(/[-.]/g, "");
+        r = rutLimpio;
+    }
+    let largo=r.length - 1;
+    let bueno=false;
+    s=0;
+    for (i=0;i<largo;i++){
+        s=s+(parseInt(r.charAt(i)) * parseInt(f.charAt(i)));
+    }
+    dv=11-(s%11);
+    if (dv==10 && (r.charAt(largo)=='K' || r.charAt(largo)=='k')){
+        bueno=true;
+    }else{
+        if (dv==11 && r.charAt(largo)=='0'){
+            bueno=true;
+        }else{
+            if (dv==parseInt(r.charAt(largo))){
+                bueno=true;
+            }else{
+                bueno=false;
+            }
+        }
+    }
+    return bueno;
+}
+/**
+ 
+Formatea un RUT chileno agregando el guion antes del dígito verificador,
+y normalizando la letra 'k' a mayúscula.*/,
+function formateaRUT(rut){
+    let r = rut;
+    if(/[-.]/.test(rut)){
+        r = rut.replace(/[-.]/g, "");
+    }
+    let largo=r.length - 1;
+    if(/[k]/.test(r)){
+        r = r.replace(/[k]/, "K")
+    }
+    r = r.slice(0, largo) + "-" + r.charAt(largo);
+    return r;
+}
