@@ -1,0 +1,76 @@
+BEGIN;
+--COMMIT;
+--ROLLBACK;
+-------------------------------------------
+INSERT INTO public.recurso 
+(
+tipo, 
+nombre, 
+indice, 
+descripcion, 
+linkpagina, 
+idrecursopadre, 
+idrecursomaestro, 
+orden, 
+idioma, 
+seccion, 
+botonera, 
+tabla,
+pos) VALUES ('MENU','Productos más Vendidos o Comprados',56,'Productos más Vendidos o Comprados','form/cuentacorriente/productosmas.php',
+(SELECT idrecurso FROM public.recurso WHERE descripcion = 'Cuentas Corrientes'),
+1,(SELECT max(orden)+1 FROM public.recurso WHERE idrecursopadre = (SELECT idrecurso FROM public.recurso WHERE descripcion = 'Cuentas Corrientes')),'ESP','CTACTE',NULL,NULL,NULL);
+-------------------------------------------
+CREATE OR REPLACE FUNCTION public.fn_insertar_recurso (
+)
+RETURNS void AS
+$body$
+DECLARE
+    __idmodulo       INTEGER;
+BEGIN
+    __idmodulo  := (SELECT m.idmodulo FROM public.modulos m WHERE nombre = 'CTACTE' AND activo = TRUE AND prueba = FALSE);
+
+    IF (__idmodulo IS NOT NULL) THEN 
+        INSERT INTO public.recurso_usuario (idrecurso, idusuario, nivelacceso)
+          SELECT (SELECT idrecurso FROM public.recurso
+                    WHERE tipo = 'MENU' AND linkpagina = 'form/cuentacorriente/productosmas.php'
+                    AND descripcion = 'Productos más Vendidos o Comprados'),
+                    vw.idusuario, 3
+          FROM public.vw_usuario vw
+          WHERE vw.esadmin IS TRUE ;
+    END IF;
+    DROP FUNCTION public.fn_insertar_recurso();
+END
+$body$
+LANGUAGE 'plpgsql';
+-------------------------------------------
+SELECT public.fn_insertar_recurso();
+-------------------------------------------
+CREATE VIEW public.vw_productomasvendido AS
+SELECT
+	p.codproducto,
+    d.descripcion,
+    SUM(d.cantidad) AS total_vendido
+FROM
+	public.documentodetalle d
+JOIN
+	public.producto p ON p.idproducto = d.idproducto
+WHERE
+	p.idproducto <> '0'
+GROUP BY 
+	p.codproducto,d.descripcion
+ORDER BY total_vendido DESC;
+-------------------------------------------
+CREATE VIEW public.vw_productomascomprado AS
+SELECT
+	p.codproducto,
+    d.descripcion,
+    SUM(d.cantidad) AS total_comprado
+FROM
+	public.documentocompradetalle d
+JOIN
+	public.producto p ON p.idproducto = d.idproducto
+WHERE
+	p.idproducto <> '0'
+GROUP BY 
+	p.codproducto,d.descripcion
+ORDER BY total_comprado DESC;
